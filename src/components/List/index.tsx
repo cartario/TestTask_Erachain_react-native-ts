@@ -1,32 +1,35 @@
+import {connect} from 'react-redux';
 import ListView from './View';
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import {getQuotes} from '../../api';
-import {adapter} from '../../utils';
-import lang from '../../lang/ru.json';
+import {ActivityIndicator} from 'react-native';
+import {fetchItemsAsync} from './listSlice';
 
 class List extends Component {
-  state = {
-    data: null,
-  };
-
   componentDidMount() {
-    getQuotes().then(response => this.setState({data: adapter(response)})); //todo dispatch to redux
-  }
-
-  renderLoader() {
-    return (
-      <View>
-        <Text>{lang.loading}</Text>
-      </View>
-    );
+    const {fetchItemsAsync} = this.props;
+    fetchItemsAsync();
   }
 
   render(): React.ReactNode {
-    const {data} = this.state; //todo move to redux
+    const {loading} = this.props;
 
-    return <>{data ? <ListView data={data} /> : this.renderLoader()}</>;
+    if (loading) {
+      return <ActivityIndicator size="large" />;
+    }
+
+    return <ListView />;
   }
 }
 
-export default List;
+function mapStateToProps(state) {
+  return {
+    items: state.list.items,
+    loading: state.list.loading,
+  };
+}
+
+const mapDispatchToProps = {
+  fetchItemsAsync,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

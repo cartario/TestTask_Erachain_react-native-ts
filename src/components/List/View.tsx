@@ -2,9 +2,12 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {ListViewProps} from '../../types';
 import {styles} from './style';
+import {useSelector} from 'react-redux';
+import {selectItems} from './listSlice';
 
-const List = ({data}: ListViewProps) => {
-  console.log(data);
+const List = () => {
+  const data: ListViewProps = useSelector(selectItems);
+  // console.log(data);
 
   return (
     <View style={styles.container}>
