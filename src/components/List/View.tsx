@@ -8,15 +8,11 @@ import Cell from '../Cell';
 import lang from '../../lang/ru.json';
 
 const Row = ({rowData}: {rowData: AdaptedFetchedItemProps}) => {
-  let res = [];
-  res.push(rowData.name);
-  res.push(rowData.last);
-  res.push(rowData.highestBid);
-  res.push(rowData.percentChange);
+  const {name, last, highestBid, percentChange} = rowData;
 
   return (
     <View style={{...styles.row, ...styles.rowNoBorder}}>
-      {res.map((each, i, arr) => (
+      {[name, last, highestBid, percentChange].map((each, i, arr) => (
         <Cell key={each + i} text={each} isLast={i === arr.length - 1} />
       ))}
     </View>
