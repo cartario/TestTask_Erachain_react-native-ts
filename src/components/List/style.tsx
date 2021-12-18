@@ -2,14 +2,19 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    width: '100%',
+    height: '100%',
+    padding: 10,
+    backgroundColor: 'pink',
   },
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderColor: '#fff',
+    borderBottomWidth: 3,
+    borderTopWidth: 3,
   },
-  red: {
-    color: 'red',
+  rowNoBorder: {
+    borderTopWidth: 0,
   },
 });

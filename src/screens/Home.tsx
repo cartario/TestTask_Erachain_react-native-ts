@@ -11,7 +11,6 @@ function HomeScreen({navigation}) {
         title={lang.checkQuotes}
         onPress={() => navigation.navigate('Details')}
       />
-      <List />
     </View>
   );
 }

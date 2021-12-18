@@ -1,20 +1,55 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {ListViewProps} from '../../types';
+import {View, ScrollView} from 'react-native';
+import {ListViewProps, AdaptedFetchedItemProps} from '../../types';
 import {styles} from './style';
 import {useSelector} from 'react-redux';
 import {selectItems} from './listSlice';
+import Cell from '../Cell';
+import lang from '../../lang/ru.json';
+
+const Row = ({rowData}: {rowData: AdaptedFetchedItemProps}) => {
+  let res = [];
+  res.push(rowData.name);
+  res.push(rowData.last);
+  res.push(rowData.highestBid);
+  res.push(rowData.percentChange);
+
+  return (
+    <View style={{...styles.row, ...styles.rowNoBorder}}>
+      {res.map((each, i, arr) => (
+        <Cell key={each + i} text={each} isLast={i === arr.length - 1} />
+      ))}
+    </View>
+  );
+};
 
 const List = () => {
   const data: ListViewProps = useSelector(selectItems);
-  // console.log(data);
+
+  const renderHeader = () => {
+    return (
+      <View style={styles.row}>
+        {lang.headerNames.map((each, i, arr) => (
+          <Cell key={each} text={each} isLast={i === arr.length - 1} bold />
+        ))}
+      </View>
+    );
+  };
+
+  const renderTable = () => {
+    return (
+      <ScrollView>
+        {data?.map(quote => (
+          <Row rowData={quote} key={quote.name} />
+        ))}
+      </ScrollView>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.red}>just red</Text>
-      <Text style={styles.bigBlue}>just bigBlue</Text>
-      <Text style={[styles.bigBlue, styles.red]}>bigBlue, then red</Text>
-      <Text style={[styles.red, styles.bigBlue]}>red, then bigBlue</Text>
+      {renderHeader()}
+      {renderTable()}
     </View>
   );
 };

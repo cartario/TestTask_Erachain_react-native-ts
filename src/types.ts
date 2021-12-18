@@ -1,3 +1,9 @@
+export interface CellProps {
+  bold?: boolean, 
+  text?: string, 
+  isLast?: boolean,  
+};
+
 export interface AdaptedFetchedItemProps {
   name?: string, 
   last?: string, 
