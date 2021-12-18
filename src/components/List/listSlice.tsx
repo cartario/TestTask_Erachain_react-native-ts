@@ -38,6 +38,14 @@ export const fetchItemsAsync = () => async (dispatch, getState) => {
   }
 };
 
+export const updateItemsAsync = () => async (dispatch, getState) => {
+  try {
+    dispatch(setItems(adapter(await getQuotes())));
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 export const selectItems = state => state.list.items;
 export const selectLoading = state => state.list.loading;
 

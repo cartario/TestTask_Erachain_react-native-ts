@@ -2,12 +2,20 @@ import {connect} from 'react-redux';
 import ListView from './View';
 import React, {Component} from 'react';
 import {ActivityIndicator} from 'react-native';
-import {fetchItemsAsync} from './listSlice';
+import {fetchItemsAsync, updateItemsAsync} from './listSlice';
 
 class List extends Component {
   componentDidMount() {
-    const {fetchItemsAsync} = this.props;
+    const {fetchItemsAsync, updateItemsAsync} = this.props;
     fetchItemsAsync();
+
+    this.timerID = setInterval(() => {
+      updateItemsAsync();
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   render(): React.ReactNode {
@@ -30,6 +38,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   fetchItemsAsync,
+  updateItemsAsync,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);
