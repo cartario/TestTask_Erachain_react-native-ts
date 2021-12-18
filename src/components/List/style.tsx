@@ -17,4 +17,13 @@ export const styles = StyleSheet.create({
   rowNoBorder: {
     borderTopWidth: 0,
   },
+  message: {
+    marginBottom: 5,
+    padding: 10,
+    backgroundColor: 'red',
+  },
+  messageText: {
+    textAlign: 'center',
+    color: '#fff',
+  },
 });

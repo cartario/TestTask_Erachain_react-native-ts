@@ -2,5 +2,6 @@
   "testApp": "Это тестовое приложение LoremIpsum",
   "checkQuotes": "Проверить котировки",
   "loading":"Loading....",
-  "headerNames": ["Name", "Last", "HighestBid", "PercentChange"]
+  "headerNames": ["Name", "Last", "HighestBid", "PercentChange"],
+  "error": "Ошибка"
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import {ListViewProps, AdaptedFetchedItemProps} from '../../types';
 import {styles} from './style';
-import {useSelector} from 'react-redux';
-import {selectItems} from './listSlice';
+import {selectItems, selectError} from './listSlice';
 import Cell from '../Cell';
 import lang from '../../lang/ru.json';
 
@@ -21,6 +21,17 @@ const Row = ({rowData}: {rowData: AdaptedFetchedItemProps}) => {
 
 const List = () => {
   const data: ListViewProps = useSelector(selectItems);
+  const error: string | null = useSelector(selectError);
+
+  const renderMessage = () => {
+    return (
+      <View style={styles.message}>
+        <Text style={styles.messageText}>
+          {lang.error}: {error}
+        </Text>
+      </View>
+    );
+  };
 
   const renderHeader = () => {
     return (
@@ -44,6 +55,7 @@ const List = () => {
 
   return (
     <View style={styles.container}>
+      {error && renderMessage()}
       {renderHeader()}
       {renderTable()}
     </View>
