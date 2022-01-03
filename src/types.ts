@@ -14,3 +14,9 @@ export interface AdaptedFetchedItemProps {
 export interface ListViewProps { 
   data: null | Array<AdaptedFetchedItemProps>
 };
+
+export interface FollowersProps { 
+  posts: Number,
+  followers: Number,
+  following: Number,
+};
